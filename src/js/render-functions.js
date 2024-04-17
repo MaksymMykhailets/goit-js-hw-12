@@ -5,8 +5,7 @@ const gallery = document.querySelector('.gallery');
 export { gallery, renderImages };
 
 function renderImages(images) {
-    gallery.innerHTML = '';
-    
+
     images.forEach(image => {
         const imageEl = `
             <div class="gallery-item">

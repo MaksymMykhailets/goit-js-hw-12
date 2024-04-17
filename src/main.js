@@ -61,9 +61,11 @@ function handleFetchSuccess(images, totalHits) {
     renderImages(images);
     showSuccessToast('Images loaded successfully');
     
-    if (currentPage * perPage >= totalHits) {
+    if (images.length < perPage) {
         toggleLoadMoreButton(false);
         showErrorToast("We're sorry, but you've reached the end of search results.");
+    } else {
+        toggleLoadMoreButton(true);
     }
 }
 

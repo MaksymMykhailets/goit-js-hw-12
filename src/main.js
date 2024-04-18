@@ -13,6 +13,7 @@ loadMoreBtn.addEventListener('click', loadMoreImages);
 let currentPage = 1;
 let currentSearchQuery = '';
 const perPage = 15;
+let totalHits = 0;
 
 async function handleSubmit(event) {
     event.preventDefault();
@@ -56,9 +57,10 @@ function showSuccessToast(message) {
     });
 }
 
-function handleFetchSuccess(images, totalHits) {
+function handleFetchSuccess(images, totalHitsValue) {
     loader.style.display = 'none';
     renderImages(images);
+    totalHits = totalHitsValue; 
     showSuccessToast('Images loaded successfully');
     
     if (images.length < perPage) {
@@ -75,7 +77,7 @@ function handleFetchError(error) {
 }
 
 function toggleLoadMoreButton(show) {
-    if (show) {
+    if (show && currentPage * perPage < totalHits) {
         loadMoreBtn.style.display = 'block';
     } else {
         loadMoreBtn.style.display = 'none';
